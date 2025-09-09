@@ -123,34 +123,3 @@ function addToCart(tree) {
   renderCart();
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(item => item.id !== id);
-  renderCart();
-}
-
-function renderCart() {
-  cartItemsEl.innerHTML = "";
-  let total = 0;
-
-  cart.forEach(item => {
-    total += item.price * item.qty;
-    const li = document.createElement("li");
-    li.className = "flex justify-between items-center bg-green-50 px-3 py-2 rounded-lg";
-
-    li.innerHTML = `
-      <div>
-        <p class="font-semibold">${item.name}</p>
-        <p class="text-sm text-gray-600">৳${item.price} × ${item.qty}</p>
-      </div>
-      <button onclick="removeFromCart(${item.id})" class="text-red-500 font-bold text-lg">×</button>
-    `;
-
-    cartItemsEl.appendChild(li);
-  });
-
-  cartTotalEl.textContent = `৳${total}`;
-}
-window.onload = () => {
-  loadCategories();
-  loadTrees();
-};
